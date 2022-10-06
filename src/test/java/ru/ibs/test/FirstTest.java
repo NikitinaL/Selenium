@@ -1,6 +1,7 @@
 package ru.ibs.test;
 
 import com.sun.xml.internal.ws.resources.UtilMessages;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,11 @@ public class FirstTest {
     wait = new WebDriverWait(driver, 10, 1000);
     //1. Перейти на страницу
     driver.get("http://training.appline.ru/user/login");
+  }
+
+  @After
+  public void after(){
+    driver.quit();
   }
 
   @Test
@@ -105,9 +111,15 @@ public class FirstTest {
     Assert.assertEquals("Список командируемых сотрудников не может быть пустым",
             errorAlert.getAttribute("Список командируемых сотрудников не может быть пустым"));
 
+
+
+
   }
 
   private void waitUtilElementToBeVisible(WebElement errorAlert) {
   }
+
+
+
 }
 
