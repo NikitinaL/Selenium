@@ -1,9 +1,11 @@
 package ru.ibs.test;
 
+import com.sun.xml.internal.ws.resources.UtilMessages;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Clock;
 import java.util.concurrent.TimeUnit;
+
 
 public class FirstTest {
   private WebDriver driver;
@@ -74,22 +78,36 @@ public class FirstTest {
     // Указать даты выезда и возвращения
     driver.findElement(By.xpath("//input[@placeholder='Укажите дату'][contains(@id,'trip_departureDatePlan')]")).click();
     driver.findElement(By.xpath("//input[@placeholder='Укажите дату'][contains(@id,'trip_departureDatePlan')]")).sendKeys("10.10.2022");
-    driver.findElement(By.xpath("//input[@placeholder='Укажите дату'][contains(@id,'trip_returnDatePlan')]")).sendKeys("15.10.2022");
+    WebElement returnDate = driver.findElement(By.xpath("//input[@placeholder='Укажите дату'][contains(@id,'trip_returnDatePlan')]"));
+    returnDate.sendKeys("15.10.2022");
+    returnDate.submit();
+
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
 
     //8.Проверить, что все поля заполнены правильно
     //Assert.assertTrue("Не выбран чекбокс Заказ билетов",ticket.isSelected());
-//  Assert.assertTrue("Название организации не совпадает",organisation.getText().contains("IBS"));
-//    Assert.assertTrue("Город отправления не совпадает",departureCity.getText().contains("Новосибирск"));
-//    Assert.assertTrue("Город прибытия не совпадает",arrivalCity.getText().contains("Санкт-Петербург"));
+    // Assert.assertEquals("IBS",organisation.getText().contains("IBS"));
+    //Assert.assertTrue("Город отправления не совпадает",departureCity.getText().contains("Новосибирск"));
+    //Assert.assertTrue("Город прибытия не совпадает",arrivalCity.getText().contains("Санкт-Петербург"));
 
     //9.Нажать "Сохранить и закрыть"
     driver.findElement(By.xpath("//button[@class='btn btn-success action-button']")).click();
 
     //10.Проверить, что на странице появилось сообщение: "Список командируемых сотрудников не может быть пустым"
-    WebElement validation = driver.findElement(By.xpath("//span[@class='validation-failed']/text()"));
-    Assert.assertTrue("Что-то пошло не так",
-            validation.isDisplayed() && validation.getText().contains("Список командируемых сотрудников не может быть пустым"));
+    String errorAlertXPath = "//span[@class='validation-failed'][contains (text(), 'Список командируемых сотрудников не может быть пустым')]";
+    WebElement errorAlert = driver.findElement(By.xpath(errorAlertXPath));
+    waitUtilElementToBeVisible(errorAlert);
+    Assert.assertEquals("Список командируемых сотрудников не может быть пустым",
+            errorAlert.getAttribute("Список командируемых сотрудников не может быть пустым"));
 
+  }
+
+  private void waitUtilElementToBeVisible(WebElement errorAlert) {
   }
 }
 
