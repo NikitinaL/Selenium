@@ -1,5 +1,6 @@
 package ru.ibs.test.framework.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,7 @@ public class NavigationPage extends BasePage{
   public NavigationPage (){
     PageFactory.initElements(driverManager.getDriver(),this);
   }
-
+  @Step("Переход в раздел командировки")
   public NavigationPage selectBusinessTripMenu() {
     //3.Проверить наличие на странице заголовка
     wait.until(ExpectedConditions.visibilityOf(driverManager.getDriver().findElement(By.xpath("//h1[@class='oro-subtitle']"))));

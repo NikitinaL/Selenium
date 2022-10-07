@@ -1,5 +1,6 @@
 package ru.ibs.test.framework.pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -72,22 +73,25 @@ public class BusinessTripPage extends BasePage{
   public BusinessTripPage (){
     PageFactory.initElements(driverManager.getDriver(), this);
   }
-
+  @Step("Создание командировки")
   public void CreateBusinessTrip (){
     //5.Нажать на  Создать командировку
     waitUtilElementToBeClickable(createTrip);
     createTrip.click();
   }
+  @Step("Проверка заголовка")
   public void CheckTitle(){
     //6.Проверить наличие на странице заголовка "Создать командировку"
     wait.until(ExpectedConditions.visibilityOf(driverManager.getDriver().findElement(By.xpath("//h1[@class='user-name']"))));
   }
+  @Step("Выбор подразделения")
   public void ChooseBusinessUnit(){
     //7.На странице создания командировки заполнить или выбрать поля:
     //Подразделение - выбрать Отдел внутренней разработки
     unitSelection.click();
     chooseUnit.click();
   }
+  @Step("Выбор принимающей организации")
   public void ChooseOrganisation (String orgName){
     // Принимающая организация  - нажать "Открыть список" и в поле "Укажите организацию" выбрать любое значение
     openList.click();
@@ -96,18 +100,19 @@ public class BusinessTripPage extends BasePage{
     inputOrganisation.sendKeys(orgName);
     selectOrganisation.click();
   }
+  @Step("Заказ билетов")
   public void Tickets(){
     // В задачах поставить чекбокс на "Заказ билетов"
     ticket.click();
   }
-
+  @Step("Указать города выбытия и прибытия")
   public void ChooseCities(String deparCity, String arrivCity){
     // Указать города выбытия и прибытия
     clearDeafaultCity.clear();
     departureCity.sendKeys(deparCity);
     arrivalCity.sendKeys(arrivCity);
   }
-
+  @Step("Заполнить даты командировки")
   public void Dates(String deparDate, String arrivDate){
     // Указать даты выезда и возвращения
     date.click();
@@ -121,7 +126,7 @@ public class BusinessTripPage extends BasePage{
     }
   }
   //8.Проверить, что все поля заполнены правильно
-
+  @Step("Проверка полей")
   public void Check(){
     Assert.assertTrue("Не выбран чекбокс Заказ билетов",ticketCheck.isSelected());
     Assert.assertEquals("IB",ourOrganisation.getText());
@@ -131,12 +136,12 @@ public class BusinessTripPage extends BasePage{
   //Assert.assertTrue("Город отправления не совпадает",departureCity.getText().contains("Новосибирск"));
   //Assert.assertTrue("Город прибытия не совпадает",arrivalCity.getText().contains("Санкт-Петербург"));
 
-
+  @Step("Сохранение командировки")
   public void SaveClose(){
     //9.Нажать "Сохранить и закрыть"
     saveCloseBtn.click();
   }
-
+  @Step("Проверить результат")
   public void ResultCheck(){
     //10.Проверить, что на странице появилось сообщение: "Список командируемых сотрудников не может быть пустым"
     waitUtilElementToBeVisible(errorAlert);
