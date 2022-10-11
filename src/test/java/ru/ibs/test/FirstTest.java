@@ -16,15 +16,15 @@ public class FirstTest extends BaseTest {
   public void test() {
     loginPage.login();
     navigationPage.selectBusinessTripMenu();
-    businessTripPage.CreateBusinessTrip();
-    businessTripPage.CheckTitle();
-    businessTripPage.ChooseBusinessUnit();
-    businessTripPage.ChooseOrganisation("IBS");
-    businessTripPage.Tickets();
-    businessTripPage.ChooseCities("Москва","Казань");
-    businessTripPage.Dates("10.10.2022","15.10.2022");
-    businessTripPage.SaveClose();
-    businessTripPage.ResultCheck();
+    businessTripPage.createBusinessTrip();
+    businessTripPage.checkTitle();
+    businessTripPage.chooseBusinessUnit();
+    businessTripPage.chooseOrganisation("IBS");
+    businessTripPage.tickets();
+    businessTripPage.chooseCities("Москва","Казань");
+    businessTripPage.dates("10.10.2022","15.10.2022");
+    businessTripPage.saveClose();
+    businessTripPage.resultCheck();
 
 
 

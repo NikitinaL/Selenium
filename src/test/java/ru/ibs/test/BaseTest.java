@@ -25,9 +25,9 @@ public class BaseTest {
     String baseURL = "http://training.appline.ru/user/login";
     driverManager.getDriver().get(propManager.getProperty("HOSTNAME"));
   }
-//  @After
-//  public void after(){
-//    driverManager.getDriver().quit();
-//  }
+  @After
+  public void after(){
+    driverManager.getDriver().quit();
+  }
 
 }

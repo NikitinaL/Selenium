@@ -1,17 +1,12 @@
 package ru.ibs.test.framework.pages;
 
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.xml.xpath.XPath;
-
-public class NavigationPage extends BasePage{
+public class NavigationPage extends BasePage {
 
 
   @FindBy(xpath = "//*[@id='main-menu']/ul/li[2]/a/span")
@@ -19,10 +14,10 @@ public class NavigationPage extends BasePage{
   @FindBy(xpath = "//*[@id='main-menu']/ul/li[2]/ul/li[4]/a/span")
   private WebElement businessTrip;
 
-  public NavigationPage (){
-    PageFactory.initElements(driverManager.getDriver(),this);
+  public NavigationPage() {
+    PageFactory.initElements(driverManager.getDriver(), this);
   }
-  @Step("Переход в раздел командировки")
+
   public NavigationPage selectBusinessTripMenu() {
     //3.Проверить наличие на странице заголовка
     wait.until(ExpectedConditions.visibilityOf(driverManager.getDriver().findElement(By.xpath("//h1[@class='oro-subtitle']"))));

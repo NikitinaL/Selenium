@@ -1,6 +1,5 @@
 package ru.ibs.test.framework.pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,7 +10,7 @@ public class BasePage {
   protected WebDriverWait wait=new WebDriverWait(driverManager.getDriver(), 10, 1000);
   protected PageManager pageManager=PageManager.getINSTANCE();
 
-  public BasePage (){
+  public BasePage(){
     PageFactory.initElements(driverManager.getDriver(),this);
 
   }

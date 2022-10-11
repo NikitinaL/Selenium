@@ -1,13 +1,12 @@
 package ru.ibs.test.framework.pages;
 
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
 
   @FindBy(xpath = "//input[@name='_username']")
@@ -19,10 +18,10 @@ public class LoginPage extends BasePage{
   @FindBy(xpath = "//button[@type='submit']")
   private WebElement submit;
 
-  public LoginPage (){
-    PageFactory.initElements(driverManager.getDriver(),this);
+  public LoginPage() {
+    PageFactory.initElements(driverManager.getDriver(), this);
   }
-  @Step("Авторизация")
+
   public NavigationPage login() {
     //2. Авторизация
     wait.until(ExpectedConditions.visibilityOf(driverManager.getDriver().findElement(By.xpath("//form[@id='login-form']"))));
